@@ -57,19 +57,17 @@ jobs:
           context: ./e-farming-project/${{ matrix.service }}
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/efarming-${{ matrix.service }}:latest
-
-        # Step 6: Set up Kubernetes
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v1
-        with:
-          version: 'v1.21.0'
-
+           
       - name: Create kubeconfig directory
-        run: mkdir -p $HOME/.kube
-      
-      - name: Configure kubectl
+        run: mkdir -p $HOME/.kube && mkdir -p $HOME/.minikube/profiles/minikube
+
+      - name: Decode kubeconfig and certificates
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+          echo "${{ secrets.MINIKUBE_CLIENT_CERT }}" | base64 --decode > $HOME/.minikube/profiles/minikube/client.crt
+          echo "${{ secrets.MINIKUBE_CLIENT_KEY }}" | base64 --decode > $HOME/.minikube/profiles/minikube/client.key
+          echo "${{ secrets.MINIKUBE_CA_CERT }}" | base64 --decode > $HOME/.minikube/ca.crt      
+    
 
       # Apply Security Configurations
       - name: Apply Security Configurations
