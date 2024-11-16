@@ -52,8 +52,7 @@ jobs:
 
       # Apply Security Configurations
       - name: Apply Security Configurations
-        run: |
-          kubectl apply -f k8s/security/rbac-role.yml
+        run: |         
           kubectl apply -f k8s/security/service-accounts.yml
           kubectl apply -f k8s/security/network-policies.yml
 
