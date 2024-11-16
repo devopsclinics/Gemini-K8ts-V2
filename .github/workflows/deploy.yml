@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-push-deploy:
@@ -32,6 +33,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
+          context: ./e-farming-project/${{ matrix.service }}
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/efarming-${{ matrix.service }}:latest
 
