@@ -1,30 +1,11 @@
-# Stage 1: Build Stage
-FROM node:16 AS builder
+# Use a simple web server to serve static files
+FROM nginx:alpine
 
-# Set the working directory in the container
-WORKDIR /app
+# Copy static files to the web server's directory
+COPY . /usr/share/nginx/html
 
-# Copy package.json and package-lock.json and install dependencies
-COPY package.json package-lock.json ./
-RUN npm install
+# Expose the port on which the server will run
+EXPOSE 80
 
-# Copy the application files
-COPY . .
-
-# Build the application (if needed)
-RUN npm run build
-
-# Stage 2: Production Stage
-FROM node:16-alpine
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy only the necessary files from the build stage
-COPY --from=builder /app .
-
-# Expose the API port
-EXPOSE 3000
-
-# Run the app
-CMD ["npm", "start"]
+# Start Nginx when the container starts
+CMD ["nginx", "-g", "daemon off;"]
