@@ -17,7 +17,7 @@ spec:
       serviceAccountName: frontend-sa
       containers:
       - name: animal-rearing
-        image: your-dockerhub-username/animal-rearing:latest
+        image: sunkolexy23/efarming-animal-rearing:latest
         ports:
         - containerPort: 80
 ---

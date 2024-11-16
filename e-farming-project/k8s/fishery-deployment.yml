@@ -17,7 +17,7 @@ spec:
       serviceAccountName: frontend-sa
       containers:
       - name: fishery
-        image: your-dockerhub-username/fishery:latest
+        image: sunkolexy23/efarming-fishery:latest
         ports:
         - containerPort: 80
 ---
