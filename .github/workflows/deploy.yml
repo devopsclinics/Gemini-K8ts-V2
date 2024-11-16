@@ -15,7 +15,7 @@ jobs:
           - animal-rearing
           - fishery
           - poultry
-          - backend
+          
 
     steps:
       - name: Checkout code
@@ -37,29 +37,29 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/efarming-${{ matrix.service }}:latest
 
-      - name: Create kubeconfig and certificates directory
-        run: mkdir -p $HOME/.kube && mkdir -p $HOME/.minikube/profiles/minikube
+#      - name: Create kubeconfig and certificates directory
+#        run: mkdir -p $HOME/.kube && mkdir -p $HOME/.minikube/profiles/minikube
 
-      - name: Decode kubeconfig and certificates
-        run: |
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
-          echo "${{ secrets.MINIKUBE_CLIENT_CERT }}" | base64 --decode > $HOME/.minikube/profiles/minikube/client.crt
-          echo "${{ secrets.MINIKUBE_CLIENT_KEY }}" | base64 --decode > $HOME/.minikube/profiles/minikube/client.key
-          echo "${{ secrets.MINIKUBE_CA_CERT }}" | base64 --decode > $HOME/.minikube/ca.crt      
+#      - name: Decode kubeconfig and certificates
+#        run: |
+#          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+#          echo "${{ secrets.MINIKUBE_CLIENT_CERT }}" | base64 --decode > $HOME/.minikube/profiles/minikube/client.crt
+#          echo "${{ secrets.MINIKUBE_CLIENT_KEY }}" | base64 --decode > $HOME/.minikube/profiles/minikube/client.key
+#          echo "${{ secrets.MINIKUBE_CA_CERT }}" | base64 --decode > $HOME/.minikube/ca.crt      
 
       # Apply Security Configurations
-      - name: Apply Security Configurations
-        run: |
-          kubectl apply -f k8s/security/rbac-role.yml
-          kubectl apply -f k8s/security/service-accounts.yml
-          kubectl apply -f k8s/security/network-policies.yml
+   #   - name: Apply Security Configurations
+  #      run: |
+   #       kubectl apply -f k8s/security/rbac-role.yml
+    #      kubectl apply -f k8s/security/service-accounts.yml
+     #     kubectl apply -f k8s/security/network-policies.yml
 
       # Step 8: Deploy to Kubernetes
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl set image deployment/${{ matrix.service }}-deployment ${{ matrix.service }}=${{ secrets.DOCKER_HUB_USERNAME }}/efarming-${{ matrix.service }}:latest
+  #    - name: Deploy to Kubernetes
+   #     run: |
+    #      kubectl set image deployment/${{ matrix.service }}-deployment ${{ matrix.service }}=${{ secrets.DOCKER_HUB_USERNAME }}/efarming-${{ matrix.service }}:latest
 
-      - name: Verify Deployments
-        run: |
-          kubectl get pods
-          kubectl get services
+     # - name: Verify Deployments
+      #  run: |
+       #   kubectl get pods
+        #  kubectl get services
