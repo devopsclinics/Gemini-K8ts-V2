@@ -17,7 +17,7 @@ spec:
       serviceAccountName: backend-sa
       containers:
       - name: backend
-        image: your-dockerhub-username/backend:latest
+        image: sunkolexy23/efarming-backend:latest
         ports:
         - containerPort: 3000
 ---

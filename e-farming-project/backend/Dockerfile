@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Build the application (if needed)
-RUN npm run build
+# RUN npm run build
 
 # Stage 2: Production Stage
 FROM node:16-alpine

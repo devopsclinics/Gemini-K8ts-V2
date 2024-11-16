@@ -17,7 +17,7 @@ spec:
       serviceAccountName: frontend-sa
       containers:
       - name: poultry
-        image: your-dockerhub-username/poultry:latest
+        image: sunkolexy23/efarmingpoultry:latest
         ports:
         - containerPort: 80
 ---
