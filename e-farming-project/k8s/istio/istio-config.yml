@@ -1,0 +1,28 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: istio-control-plane
+spec:
+  profile: default
+  components:
+    ingressGateways:
+      - name: istio-ingressgateway
+        enabled: true
+  addonComponents:
+    prometheus:
+      enabled: true
+    grafana:
+      enabled: true
+    kiali:
+      enabled: true
+    jaeger:
+      enabled: true
+  values:
+    global:
+      proxy:
+        accessLogFile: "/dev/stdout"
+      controlPlaneSecurityEnabled: true
+    gateways:
+      istio-ingressgateway:
+        type: LoadBalancer

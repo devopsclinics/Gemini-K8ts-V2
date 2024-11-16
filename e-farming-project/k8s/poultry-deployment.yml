@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poultry
+  labels:
+    app: poultry
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: poultry
+  template:
+    metadata:
+      labels:
+        app: poultry
+    spec:
+      serviceAccountName: frontend-sa
+      containers:
+      - name: poultry
+        image: your-dockerhub-username/poultry:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poultry-service
+spec:
+  selector:
+    app: poultry
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

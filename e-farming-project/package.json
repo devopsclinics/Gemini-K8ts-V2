@@ -1,0 +1,14 @@
+{
+    "name": "efarming-project",
+    "version": "1.0.0",
+    "description": "E-farming platform project",
+    "main": "index.js",
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {
+      "start": "echo \"Use individual service Dockerfiles to build and run the platform\""
+    },
+    "author": "",
+    "license": "ISC"
+  }
+  
