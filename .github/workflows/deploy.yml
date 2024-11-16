@@ -45,8 +45,7 @@ jobs:
 
       - name: Create kubeconfig directory
         run: mkdir -p $HOME/.kube
-
-      # Step 7: Configure Kubernetes context
+      
       - name: Configure kubectl
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
