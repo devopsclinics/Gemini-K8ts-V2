@@ -1,0 +1,16 @@
+{
+    "name": "efarming-backend",
+    "version": "1.0.0",
+    "description": "Backend service for E-farming platform",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js",
+      "test": "echo \"No tests specified\" && exit 0"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+  

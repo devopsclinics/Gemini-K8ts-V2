@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  animal-rearing:
+    build:
+      context: ./animal-rearing
+    ports:
+      - "8081:3000"
+  
+  fishery:
+    build:
+      context: ./fishery
+    ports:
+      - "8082:3000"
+  
+  poultry:
+    build:
+      context: ./poultry
+    ports:
+      - "8083:3000"
+  
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"

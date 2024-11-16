@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: animal-rearing
+  labels:
+    app: animal-rearing
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: animal-rearing
+  template:
+    metadata:
+      labels:
+        app: animal-rearing
+    spec:
+      serviceAccountName: frontend-sa
+      containers:
+      - name: animal-rearing
+        image: your-dockerhub-username/animal-rearing:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: animal-rearing-service
+spec:
+  selector:
+    app: animal-rearing
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

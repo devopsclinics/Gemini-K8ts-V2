@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+npm-debug.log
+
+# Docker
+*.dockerfile
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# MacOS
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/

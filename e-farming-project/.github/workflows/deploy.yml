@@ -1,0 +1,66 @@
+name: Build, Push and Deploy Microservices
+       
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - animal-rearing
+          - fishery
+          - poultry
+          - backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/efarming-${{ matrix.service }}:latest
+
+        # Step 6: Set up Kubernetes
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v1
+        with:
+          version: 'v1.21.0'
+
+      # Step 7: Configure Kubernetes context
+      - name: Configure kubectl
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+
+      # Apply Security Configurations
+      - name: Apply Security Configurations
+        run: |
+          kubectl apply -f k8s/security/rbac-role.yml
+          kubectl apply -f k8s/security/service-accounts.yml
+          kubectl apply -f k8s/security/network-policies.yml
+
+       # Step 8: Deploy to Kubernetes
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl set image deployment/${{ matrix.service }}-deployment ${{ matrix.service }}=${{ secrets.DOCKER_HUB_USERNAME }}/efarming-${{ matrix.service }}:latest
+
+      - name: Verify Deployments
+        run: |
+          kubectl get pods
+          kubectl get services
+     
+     
