@@ -3,7 +3,7 @@ name: Build, Push and Deploy Microservices
 on:
   push:
     branches:
-      - main
+      - Olasunkanmi
   workflow_dispatch:
 
 jobs:         
@@ -15,6 +15,7 @@ jobs:
           - animal-rearing
           - fishery
           - poultry
+          - backend
           
 
     steps:
