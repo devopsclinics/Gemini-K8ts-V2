@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         service:
+          - login
           - animal-rearing
           - fishery
           - poultry
