@@ -7,26 +7,33 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
+    <header>
+        <h1>Welcome to eFarming</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section id="login-section" class="form-section">
             <h2>Login</h2>
             <form id="login-form">
-                <label for="username">Username:</label>
+                <label for="login-username">Username:</label>
                 <input type="text" id="login-username" name="username" required>
-                <label for="password">Password:</label>
+                <label for="login-password">Password:</label>
                 <input type="password" id="login-password" name="password" required>
                 <label for="service">Select Service:</label>
                 <select id="service" name="service" required>
                     <option value="/animal-rearing">Animal Rearing</option>
                     <option value="/fishery">Fishery</option>
                     <option value="/poultry">Poultry</option>
-                    <option value="/backend">Backend</option>
                 </select>
                 <button type="submit">Login</button>
             </form>
-        </div>
+        </section>
 
-        <div class="form-container">
+        <section id="create-account-section" class="form-section">
             <h2>Create Account</h2>
             <form id="create-account-form">
                 <label for="new-username">Username:</label>
@@ -35,8 +42,11 @@
                 <input type="password" id="new-password" name="password" required>
                 <button type="submit">Create Account</button>
             </form>
-        </div>
-    </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 eFarming. All rights reserved.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
